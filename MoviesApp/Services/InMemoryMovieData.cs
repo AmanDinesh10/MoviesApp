@@ -3,7 +3,7 @@ using MoviesApp.Models;
 
 namespace MoviesApp.Services
 {
-    public class InMemoryMovieData
+    public class InMemoryMovieData : IMoviesService
     {
         private readonly List<Movie> movies = new List<Movie>()
         {
@@ -13,7 +13,7 @@ namespace MoviesApp.Services
             new Movie {Id = 4, Name = "Lover", Description = "Romantic Movie", Rating = 8 }
         };
 
-        public IEnumerable<Movie> GetMovies()
+        public IEnumerable<Movie> GetAllMovies()
         {
             return movies;
         }

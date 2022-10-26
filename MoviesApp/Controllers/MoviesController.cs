@@ -7,16 +7,16 @@ namespace MoviesApp.Controllers
 {
     public class MoviesController : Controller
     {
-       private readonly InMemoryMovieData inMemoryMovieData;
+       private readonly IMoviesService _inMemoryMovieData;
 
-        public MoviesController()
+        public MoviesController(IMoviesService inMemoryMovieData)
         {
-            inMemoryMovieData = new InMemoryMovieData();
+            _inMemoryMovieData = inMemoryMovieData;
         }
 
         public IActionResult Index()
         {
-            var movies = inMemoryMovieData.GetMovies();
+            var movies = _inMemoryMovieData.GetAllMovies();
             return View(movies);
         }
     }
