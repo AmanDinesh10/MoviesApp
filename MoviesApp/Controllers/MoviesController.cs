@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MoviesApp.Models;
+using MoviesApp.Services;
 
 namespace MoviesApp.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly List<Movie> movies = new List<Movie>()
+       private readonly InMemoryMovieData inMemoryMovieData;
+
+        public MoviesController()
         {
-            new Movie {Id = 1, Name = "Iron Man", Description = "Action Movie", Rating = 8 },
-            new Movie {Id = 2, Name = "Bat Man", Description = "Action Movie", Rating = 8 },
-            new Movie {Id = 3, Name = "KGF 2", Description = "Action Movie", Rating = 8 },
-            new Movie {Id = 4, Name = "Lover", Description = "Romantic Movie", Rating = 8 }
-        };
-        
+            inMemoryMovieData = new InMemoryMovieData();
+        }
+
         public IActionResult Index()
         {
+            var movies = inMemoryMovieData.GetMovies();
             return View(movies);
         }
     }
