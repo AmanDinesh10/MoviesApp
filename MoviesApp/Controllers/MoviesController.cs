@@ -7,17 +7,29 @@ namespace MoviesApp.Controllers
 {
     public class MoviesController : Controller
     {
-       private readonly IMoviesService _inMemoryMovieData;
+       private readonly IMoviesService _movieService;
 
-        public MoviesController(IMoviesService inMemoryMovieData)
+        public MoviesController(IMoviesService movieService)
         {
-            _inMemoryMovieData = inMemoryMovieData;
+            _movieService = movieService;
         }
 
         public IActionResult Index()
         {
-            var movies = _inMemoryMovieData.GetAllMovies();
+            var movies = _movieService.GetAllMovies();
             return View(movies);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Movie movie)
+        {
+            _movieService.AddMovie(movie);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

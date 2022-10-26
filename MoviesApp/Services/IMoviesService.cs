@@ -6,5 +6,6 @@ namespace MoviesApp.Services
     public interface IMoviesService
     {
          IEnumerable<Movie> GetAllMovies();
+         void AddMovie(Movie movie);
     }
 }

@@ -13,6 +13,11 @@ namespace MoviesApp.Services
             new Movie {Id = 4, Name = "Lover", Description = "Romantic Movie", Rating = 8 }
         };
 
+        public void AddMovie(Movie movie)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Movie> GetAllMovies()
         {
             return movies;

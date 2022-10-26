@@ -14,6 +14,12 @@ namespace MoviesApp.Services
             _context = context;
         }
 
+        public void AddMovie(Movie movie)
+        {
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<Movie> GetAllMovies()
         {
             var movies = _context.Movies.ToList();
