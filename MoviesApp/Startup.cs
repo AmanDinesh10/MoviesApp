@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoviesApp.Data;
 using MoviesApp.Services;
 
 namespace MoviesApp
@@ -27,7 +29,12 @@ namespace MoviesApp
             services.AddControllersWithViews();
 
             // Adding Our Services
-            services.AddScoped<IMoviesService, InMemoryMovieData>();
+            // services.AddScoped<IMoviesService, InMemoryMovieData>();
+            services.AddScoped<IMoviesService, MovieService>();
+
+            // Adding DbContext
+            services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
